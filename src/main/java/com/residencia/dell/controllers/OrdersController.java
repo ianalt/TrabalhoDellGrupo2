@@ -2,6 +2,11 @@
 
 import java.util.List;
 
+import com.residencia.dell.entities.Orders;
+import com.residencia.dell.services.OrdersService;
+import com.residencia.dell.vo.NotafiscalVO;
+import com.residencia.dell.vo.OrdersVO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,25 +21,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.residencia.dell.entities.Orders;
-import com.residencia.dell.services.OrdersService;
-import com.residencia.dell.vo.NotafiscalVO;
-import com.residencia.dell.vo.OrdersVO;
-
 @RestController
 @RequestMapping("/orders")
 public class OrdersController {
-	@Autowired
+    @Autowired
 	private OrdersService ordersService;
 
 	@GetMapping("/nf/{orderid}")
-	public ResponseEntity<NotafiscalVO> emitirnf(@PathVariable Integer orderid) {
+	public ResponseEntity<NotafiscalVO> emitirnf(@PathVariable Integer orderid){
 		HttpHeaders headers = new HttpHeaders();
-
-		NotafiscalVO notaFiscal = ordersService.emitirnf(orderid);
-
-		return new ResponseEntity<>(notaFiscal, headers, HttpStatus.OK);
+		return new ResponseEntity<>(ordersService.emitirnf(orderid), headers, HttpStatus.OK);
 	}
+
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Orders> findById(@PathVariable Integer id) {
@@ -43,19 +41,25 @@ public class OrdersController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Orders>> findAll(@RequestParam(required = false) Integer pagina,
-			@RequestParam(required = false) Integer qtdRegistros) throws Exception {
-
+	public ResponseEntity<List<Orders>> findAll(
+			@RequestParam(required = false) Integer pagina,
+			@RequestParam(required = false) Integer qtdRegistros) 
+					throws Exception {
+		
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(ordersService.findAll(pagina, qtdRegistros), headers, HttpStatus.OK);
+		return new ResponseEntity<>(ordersService.findAll(pagina, 
+				qtdRegistros), headers, HttpStatus.OK);
 	}
-
+	
 	@GetMapping("/listar-todos")
-	public ResponseEntity<List<OrdersVO>> findAllVO(@RequestParam(required = false) Integer pagina,
-			@RequestParam(required = false) Integer qtdRegistros) throws Exception {
-
+	public ResponseEntity<List<OrdersVO>> findAllVO(
+			@RequestParam(required = false) Integer pagina,
+			@RequestParam(required = false) Integer qtdRegistros) 
+					throws Exception {
+		
 		HttpHeaders headers = new HttpHeaders();
-		return new ResponseEntity<>(ordersService.findAllVO(pagina, qtdRegistros), headers, HttpStatus.OK);
+		return new ResponseEntity<>(ordersService.findAllVO(pagina, 
+				qtdRegistros), headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/count")
@@ -73,14 +77,14 @@ public class OrdersController {
 			return new ResponseEntity<>(ordersService.save(orders), headers, HttpStatus.BAD_REQUEST);
 	}
 
-	@PostMapping("/saveVO")
-	public ResponseEntity<Orders> saveVO(@RequestBody OrdersVO ordersVO) {
+	@PostMapping("/savevo")
+	public ResponseEntity<Orders> saveVO(@RequestBody OrdersVO ordersVo) {
 		HttpHeaders headers = new HttpHeaders();
-		Orders newOrder = ordersService.saveVO(ordersVO);
-		if (null != newOrder)
-			return new ResponseEntity<>(newOrder, headers, HttpStatus.OK);
+		Orders orders = ordersService.saveVO(ordersVo);
+		if (null != orders)
+		return new ResponseEntity<>(orders, headers, HttpStatus.OK);
 		else
-			return new ResponseEntity<>(newOrder, headers, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(orders, headers, HttpStatus.BAD_REQUEST);
 	}
 
 	@PutMapping("/{id}")

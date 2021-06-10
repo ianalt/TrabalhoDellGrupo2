@@ -5,17 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class OrderLinesId implements Serializable {
-
+public class OrderlinesID implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	private Integer orderlineid;
 	private Integer orderid;
+	
+	public OrderlinesID(){
 
-	public OrderLinesId() {
 	}
 
-	public OrderLinesId(Integer orderlineid, Integer orderid) {
+	public OrderlinesID(Integer orderlineid, Integer orderid) {
 		this.orderlineid = orderlineid;
 		this.orderid = orderid;
 	}
@@ -23,19 +24,15 @@ public class OrderLinesId implements Serializable {
 	public Integer getOrderlineid() {
 		return orderlineid;
 	}
-
 	public void setOrderlineid(Integer orderlineid) {
 		this.orderlineid = orderlineid;
 	}
-
 	public Integer getOrderid() {
 		return orderid;
 	}
-
 	public void setOrderid(Integer orderid) {
 		this.orderid = orderid;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -44,7 +41,6 @@ public class OrderLinesId implements Serializable {
 		result = prime * result + ((orderlineid == null) ? 0 : orderlineid.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,7 +49,7 @@ public class OrderLinesId implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrderLinesId other = (OrderLinesId) obj;
+		OrderlinesID other = (OrderlinesID) obj;
 		if (orderid == null) {
 			if (other.orderid != null)
 				return false;
@@ -66,5 +62,4 @@ public class OrderLinesId implements Serializable {
 			return false;
 		return true;
 	}
-
 }

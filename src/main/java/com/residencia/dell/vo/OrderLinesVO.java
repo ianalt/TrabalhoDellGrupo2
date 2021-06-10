@@ -2,22 +2,22 @@ package com.residencia.dell.vo;
 
 import java.util.Calendar;
 
-import com.residencia.dell.entities.OrderLinesId;
+import com.residencia.dell.entities.OrderlinesID;
 
 
 public class OrderLinesVO {
-    private OrderLinesId orderLineId;
+    private OrderlinesID orderLineId;
 	private OrdersVO ordersVO;
 	private Integer prodId;
 	private Integer quantity;
 	private Calendar orderDate;
 
-	public OrderLinesId getOrderLineId() {
+	public OrderlinesID getOrderLineId() {
 		return orderLineId;
 	}
 
-	public void setOrderLineId(OrderLinesId orderLinesId) {
-		this.orderLineId = orderLinesId;
+	public void setOrderLineId(OrderlinesID orderLineId) {
+		this.orderLineId = orderLineId;
 	}
 
 	public OrdersVO getOrdersVO() {

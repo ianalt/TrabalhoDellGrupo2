@@ -1,14 +1,14 @@
 package com.residencia.dell.repositories;
 
+import com.residencia.dell.entities.Orderlines;
+import com.residencia.dell.entities.OrderlinesID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.residencia.dell.entities.OrderLines;
-import com.residencia.dell.entities.OrderLinesId;
-
 @Repository
-public interface OrderLinesRepository extends JpaRepository<OrderLines, OrderLinesId> {
+public interface OrderlinesRepository extends JpaRepository<Orderlines, OrderlinesID> {
 
-    OrderLines findByOrderLinesId(Integer orderLinesId);
-	
+    Orderlines findByOrderLinesId(Integer orderlineId);
+    
 }

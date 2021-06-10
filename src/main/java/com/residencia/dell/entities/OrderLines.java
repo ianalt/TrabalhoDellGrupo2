@@ -1,5 +1,6 @@
 ﻿package com.residencia.dell.entities;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -13,32 +14,33 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "orderlines")
-public class OrderLines{
-
+public class Orderlines implements Serializable {
+    
 	@EmbeddedId
-	OrderLinesId orderLinesId;
-	
-	@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name = "orderid", referencedColumnName = "orderid", insertable = false, updatable = false)
-	private Orders orders;
+	OrderlinesID orderLinesId;
+    // //Fk orders / Talvez problema com o objeto orders
+    
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "orderid", referencedColumnName = "orderid", insertable=false, updatable=false)
+    private Orders order;
 
-	@Column(name = "prod_id")
-	private Integer prodId;
+    @Column(name = "prod_id")
+    private Integer prodId;
 
-	@Column(name = "quantity")
-	private Integer quantity;
+    @Column(name = "quantity")
+    private Integer quantity;
 
-	@Column(name = "orderdate")
-	private Calendar orderDate;
-	
-	public OrderLines() {
+    @Column(name = "orderdate")
+    private Calendar orderDate;
+
+    public Orderlines() {
 	}
 	
-	public OrderLines(Integer orderlineid, Integer orderid, Integer prodId, Integer quantity,
+	public Orderlines(Integer orderlineid, Integer orderid, Integer prodId, Integer quantity,
 			Calendar orderDate) {
 		
-		OrderLinesId orderLinesId = new OrderLinesId(orderlineid, orderid); 
+		OrderlinesID orderLinesId = new OrderlinesID(orderlineid, orderid); 
 		
 		this.orderLinesId = orderLinesId;
 		this.prodId = prodId;
@@ -46,44 +48,53 @@ public class OrderLines{
 		this.orderDate = orderDate;
 	}
 
-	public OrderLinesId getOrderLinesId() {
-		return orderLinesId;
-	}
 
-	public void setOrderLinesId(OrderLinesId orderLinesId) {
-		this.orderLinesId = orderLinesId;
-	}
+    public OrderlinesID getOrderLinesId() {
+        return orderLinesId;
+    }
 
-	public Orders getOrders() {
-		return orders;
-	}
+    public void setOrderLinesId(OrderlinesID orderLinesId) {
+        this.orderLinesId = orderLinesId;
+    }
 
-	public void setOrders(Orders orders) {
-		this.orders = orders;
-	}
+    public Orders getOrder() {
+        return order;
+    }
 
-	public Integer getProdId() {
-		return prodId;
-	}
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
 
-	public void setProdId(Integer prodId) {
-		this.prodId = prodId;
-	}
+    @JsonBackReference
+    public Orders getOrders() {
+        return this.order;
+    }
 
-	public Integer getQuantity() {
-		return quantity;
-	}
+    public void setOrders(Orders orders) {
+        this.order = orders;
+    }
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
+    public Integer getProdId() {
+        return this.prodId;
+    }
 
-	public Calendar getOrderDate() {
-		return orderDate;
-	}
+    public void setProdId(Integer prodId) {
+        this.prodId = prodId;
+    }
 
-	public void setOrderDate(Calendar orderDate) {
-		this.orderDate = orderDate;
-	}
+    public Integer getQuantity() {
+        return this.quantity;
+    }
 
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Calendar getOrderDate() {
+        return this.orderDate;
+    }
+
+    public void setOrderDate(Calendar orderDate) {
+        this.orderDate = orderDate;
+    }
 }

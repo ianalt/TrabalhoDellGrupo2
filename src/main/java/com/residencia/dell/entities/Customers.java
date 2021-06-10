@@ -22,8 +22,8 @@ public class Customers {
     private Integer customerId;
 
     //bidirecional com orders
-    @OneToMany(mappedBy = "customer")
     @JsonManagedReference
+    @OneToMany(mappedBy = "customerId")
     private List<Orders> ListOrders;
 
     // //bidirecional com custHist
@@ -97,6 +97,7 @@ public class Customers {
         this.customerId = customerId;
     }
 
+    @JsonManagedReference
     public List<Orders> getListOrders() {
         return this.ListOrders;
     }

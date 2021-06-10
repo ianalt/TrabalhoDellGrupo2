@@ -5,13 +5,22 @@ import java.util.Calendar;
 import java.util.List;
 
 public class OrdersVO {
-	private Integer orderId;
+    private Integer orderId;
 	private Calendar orderDate;
 	private BigDecimal netAmount;
 	private BigDecimal tax;
 	private BigDecimal totalAmount;
-	private Integer customerId;
+	private Integer customers;
 	private List<OrderLinesVO> listOrderLinesVO;
+
+
+	public Integer getCustomers() {
+		return this.customers;
+	}
+
+	public void setCustomers(Integer customers) {
+		this.customers = customers;
+	}
 
 	public Integer getOrderId() {
 		return orderId;
@@ -51,14 +60,6 @@ public class OrdersVO {
 
 	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
-	}
-
-	public Integer getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
 	}
 
 	public List<OrderLinesVO> getListOrderLinesVO() {

@@ -2,51 +2,53 @@ package com.residencia.dell.services;
 
 import java.util.List;
 
+import com.residencia.dell.entities.Orderlines;
+import com.residencia.dell.repositories.OrderlinesRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.residencia.dell.entities.OrderLines;
-import com.residencia.dell.repositories.OrderLinesRepository;
 
 @Service
-public class OrderLinesService {
+public class OrderlinesService {
+    
+    @Autowired
+    public OrderlinesRepository orderlinesRepository;
 
-	@Autowired
-	public OrderLinesRepository orderLinesRepository;
+    // public Orderlines findById(Integer id){
+    //     return orderlinesRepository.findById(id).get();
+    // }
 
-	public OrderLines findById(Integer id) {
-		return orderLinesRepository.findByOrderLinesId(id);
-	}
+    // findOrderlineidAndOrderid
+    public Orderlines findById(Integer orderlineId){
+        return orderlinesRepository.findByOrderLinesId(orderlineId);
+    }
 
-	// findOrderlineidAndOrderid
-//	public OrderLines findById(Integer orderlineId, Integer orderId) {
-//		return orderLinesRepository.findByOrderLineIdAndOrderId(orderlineId, orderId);
-//	}
+    public List<Orderlines> findAll(){
+        return orderlinesRepository.findAll();
+    }
 
-	public List<OrderLines> findAll() {
-		return orderLinesRepository.findAll();
-	}
+    public Long Count(){
+        return orderlinesRepository.count();
+    }
 
-	public Long count() {
-		return orderLinesRepository.count();
-	}
+    public Orderlines save(Orderlines orderlines){
+        return orderlinesRepository.save(orderlines);
+    }
 
-	public OrderLines save(OrderLines orderlines) {
-		return orderLinesRepository.save(orderlines);
-	}
+    public boolean delete(Integer id){
+        if (id != null){
+            orderlinesRepository.delete(orderlinesRepository.findByOrderLinesId(id));
+            return true;
+        }else{
+            return false;
+        }
+    }
 
-	public boolean delete(Integer id) {
-		if (id != null) {
-			orderLinesRepository.delete(orderLinesRepository.findByOrderLinesId(id));
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public Orderlines update(Orderlines orderlines, Integer id){
+        orderlines.setProdId(id); 
+        return orderlinesRepository.save(orderlines);
+    }
 
-	public OrderLines update(OrderLines orderlines, Integer id) {
-		orderlines.setProdId(id);
-		return orderLinesRepository.save(orderlines);
-	}
 
 }
